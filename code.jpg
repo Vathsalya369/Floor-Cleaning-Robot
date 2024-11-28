@@ -1,1 +1,121 @@
-
+char t;
+int leftMotor1=13;
+int leftMotor2=12;
+int rightMotor1=11;
+int rightMotor2=10;
+int leftMotor3=8;
+int leftMotor4=9;
+int rightMotor3=7;
+int rightMotor4=6;
+int vaccum1=2;
+int vaccum2=4;
+int pump1=3;
+int pump2=5;
+int speed=130;
+void setup() {
+pinMode(leftMotor1,OUTPUT); //left motors forward 1
+pinMode(leftMotor2,OUTPUT); //left motors reverse 1
+pinMode(rightMotor1,OUTPUT); //right motors forward 1
+pinMode(rightMotor2,OUTPUT); //right motors reverse 1
+pinMode(leftMotor3,OUTPUT); //left motors forward 2
+pinMode(leftMotor4,OUTPUT); //left motors reverse 2
+pinMode(rightMotor3,OUTPUT); //right motors forward 1
+pinMode(rightMotor4,OUTPUT);pinMode(vaccum1,OUTPUT);
+pinMode(vaccum2,OUTPUT);
+pinMode(pump1,OUTPUT);
+pinMode(pump2,OUTPUT);
+digitalWrite(leftMotor1,LOW);
+digitalWrite(leftMotor2, LOW);
+digitalWrite(rightMotor1,LOW);
+digitalWrite(rightMotor2, LOW);
+digitalWrite(leftMotor3,LOW);
+digitalWrite(leftMotor4, LOW);
+digitalWrite(rightMotor3,LOW);
+digitalWrite(rightMotor4, LOW);
+digitalWrite(vaccum1,LOW);
+digitalWrite(vaccum2,LOW);
+digitalWrite(pump1,LOW);
+digitalWrite(pump2,LOW);
+Serial.begin(9600);
+}
+void loop() {
+if(Serial.available()){
+t = Serial.read();
+Serial.println(t);
+}if(t == 'F'){ //move Forward(all motors rotate in forward direction)
+digitalWrite(leftMotor1, HIGH);
+digitalWrite(leftMotor2, LOW);
+digitalWrite(rightMotor1, HIGH);
+digitalWrite(rightMotor2, LOW);
+}
+else if(t == 'B'){ //BaCKWARD
+digitalWrite(leftMotor1, LOW);
+digitalWrite(leftMotor2,HIGH);
+digitalWrite(rightMotor1, LOW);
+digitalWrite(rightMotor2,HIGH);
+}
+else if(t == 'R'){ //move Right
+digitalWrite(leftMotor1, HIGH);
+digitalWrite(leftMotor2, LOW);
+digitalWrite(rightMotor1, LOW);
+digitalWrite(rightMotor2, HIGH);
+}
+else if(t == 'L'){ //Move Left
+digitalWrite(leftMotor1, LOW);
+digitalWrite(leftMotor2, HIGH);
+digitalWrite(rightMotor1, HIGH);
+digitalWrite(rightMotor2, LOW);}
+else if(t == 'G'){ // LEFT mop
+digitalWrite(leftMotor3,LOW );
+digitalWrite(leftMotor4, HIGH);
+digitalWrite(rightMotor3, HIGH);
+digitalWrite(rightMotor4, LOW);
+}
+else if(t == 'I'){ // RIGHT mop
+digitalWrite(leftMotor3, HIGH);
+digitalWrite(leftMotor4, LOW);
+digitalWrite(rightMotor3, LOW);
+digitalWrite(rightMotor4, HIGH);
+}
+else if(t == 'J'){ //FORWARD mop
+digitalWrite(leftMotor3, HIGH);
+digitalWrite(leftMotor4, LOW);
+digitalWrite(rightMotor3, HIGH);
+digitalWrite(rightMotor4, LOW);
+}
+else if(t == 'H'){ //BACKWARD mop
+digitalWrite(leftMotor3, LOW);
+digitalWrite(leftMotor4, HIGH);
+digitalWrite(rightMotor3, LOW);
+digitalWrite(rightMotor4, HIGH);
+}else if(t == 'S'){ //STOP (all motors stop)
+digitalWrite(13,LOW);
+digitalWrite(12,LOW);
+digitalWrite(11,LOW);
+digitalWrite(10,LOW);
+digitalWrite(9,LOW);
+digitalWrite(8,LOW);
+digitalWrite(7,LOW);
+digitalWrite(6,LOW);
+}
+else if(t == 'W'){ //vaccum on
+digitalWrite(vaccum1,HIGH);
+digitalWrite(vaccum2,LOW);
+Serial.println(t);
+}
+else if(t == 'w'){ //vaccum off
+digitalWrite(vaccum1,LOW);
+digitalWrite(vaccum2,LOW);
+Serial.println(t);
+}
+else if(t == 'U'){ //pump on
+digitalWrite(pump1,HIGH);
+digitalWrite(pump2,LOW);
+Serial.println(t);
+}
+else if(t =='u'){ //pump offdigitalWrite(pump1,LOW);
+digitalWrite(pump2,LOW);
+Serial.println(t);
+}
+delay(100);
+}
